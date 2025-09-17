@@ -13,36 +13,36 @@ struct Node {
     }
 };
 
-// function for merging two linkedList
-Node* merge (Node*l1 , Node*l2) {
-    Node* dummyNode = new Node(-1);
-    Node* res = dummyNode;
 
-    while (l1 != nullptr && l2 != nullptr) {
-        if (l1 -> data <= l2 -> data) {
-            res -> child = l1;
-            l1 = l1 -> child;
-        } else {
-            res -> child = l2;
-            res = l2;
-            l2 = l2 -> child;
+class Solution {
+public:
+    Node* flatten(Node* head) {
+        if (!head) return nullptr;
+
+        Node* current = head;
+        while (current) {
+            // If child exists
+            if (current->child) {
+                Node* tempNext = current->next;
+
+                // Link current node with child
+                current->next = current->child;
+                current->child->prev = current;
+                current->child = nullptr;
+
+                // Find the tail of the child list
+                Node* tail = current->next;
+                while (tail->next) {
+                    tail = tail->next;
+                }
+
+                // Connect the original next to the tail of child list
+                tail->next = tempNext;
+                if (tempNext) tempNext->prev = tail;
+            }
+            current = current->next;
         }
 
-        res -> next = nullptr;
+        return head;
     }
-
-    if (l1) res -> child = l1;
-    else res -> child = l2;
-
-    if (dummyNode->child) dummyNode -> child -> next = nullptr;
-    return dummyNode -> child;
-}
-
-Node* flatten (Node* head) {
-   if (head == nullptr) return head;
-   if (head -> next = nullptr) return head;
-
-   Node* mergeHead = flatten(head -> next);
-   head = merge(head,mergeHead);
-   return head;
-}
+};
