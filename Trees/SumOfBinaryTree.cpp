@@ -15,8 +15,16 @@ struct Node
 
 class Solution {
   public:
+    void counting(Node* node, int &sum) {
+        if (node == nullptr) return;
+        sum += node->data;
+        counting(node->left, sum);
+        counting(node->right, sum);
+    }
+
     int sumBT(Node* root) {
-        // code here
-        
+        int sum = 0;
+        counting(root, sum);
+        return sum;
     }
 };
