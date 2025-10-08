@@ -13,6 +13,7 @@ struct Node
     }
 };
 
+
 class Solution {
   public:
     void counting(Node* node, int &sum) {
