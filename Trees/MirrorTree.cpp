@@ -14,6 +14,8 @@ public:
         right = nullptr;
     }
 };
+
+
 class Solution {
   public:
     void mirror(Node* root) {
