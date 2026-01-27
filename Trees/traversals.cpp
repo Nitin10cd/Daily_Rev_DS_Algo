@@ -41,5 +41,17 @@ public:
         return ans;
     }
 
-    
+    // inorder
+        // post order 
+     void calcInOrder(TreeNode* node, vector<int> & ans){
+        if (node -> left) calcPreOrder(node->left, ans);
+        ans.push_back(node -> val);
+        if (node -> right) calcPreOrder(node -> right,ans);
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        if (!root) return ans;
+        calcPreOrder(root,ans);
+        return ans;
+    }
 };
